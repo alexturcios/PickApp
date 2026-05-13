@@ -2,33 +2,64 @@
 
 import { Input } from "@/components/atoms"
 import { SearchIcon } from "@/icons"
-import { useSearchParams } from "next/navigation"
-import { useState } from "react"
-import { redirect } from "next/navigation"
+import { useSearchBox } from "react-instantsearch"
+import { redirect, usePathname } from "next/navigation"
+import { useState, useRef, useEffect } from "react"
+import { AutocompleteDropdown } from "@/components/organisms/AutocompleteDropdown/AutocompleteDropdown"
 
 export const NavbarSearch = () => {
-  const searchParams = useSearchParams()
+  const { query, refine } = useSearchBox()
+  const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  const [search, setSearch] = useState(searchParams.get("query") || "")
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
 
-  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (search) {
-      redirect(`/categories?query=${search}`)
-    } else {
-      redirect(`/categories`)
+  const submitHandler = () => {
+    setIsOpen(false)
+    if (pathname !== "/") {
+      redirect(`/?query=${query}`)
     }
   }
 
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    submitHandler()
+  }
+
   return (
-    <form className="flex items-center" method="POST" onSubmit={submitHandler}>
-      <Input
-        icon={<SearchIcon />}
-        placeholder="Search product"
-        value={search}
-        changeValue={setSearch}
+    <div className="relative flex-1 max-w-2xl" ref={containerRef}>
+      <form className="flex items-center w-full relative z-50" method="POST" onSubmit={handleFormSubmit}>
+        <div className="w-full" onClick={() => setIsOpen(true)}>
+          <Input
+            icon={<SearchIcon />}
+            placeholder="Search for products, brands, categories..."
+            value={query}
+            changeValue={(v) => {
+              refine(v)
+              if (!isOpen) setIsOpen(true)
+            }}
+            autoComplete="off"
+          />
+        </div>
+        <input type="submit" className="hidden" />
+      </form>
+
+      <AutocompleteDropdown 
+        isOpen={isOpen} 
+        onClose={() => setIsOpen(false)} 
+        onSubmit={submitHandler}
       />
-      <input type="submit" className="hidden" />
-    </form>
+    </div>
   )
 }

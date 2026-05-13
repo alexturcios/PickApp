@@ -11,6 +11,11 @@ import { WishlistPage } from "./WishlistPage/WishlistPage"
 import { ProductDetailsPage } from "./ProductDetailsPage/ProductDetailsPage"
 import { AlgoliaProductsListing } from "./ProductListing/AlgoliaProductsListing"
 import { OrdersPagination } from "../organisms/OrdersPagination/OrdersPagination"
+import { HeroCarousel } from "./HeroCarousel/HeroCarousel"
+import { PromoBannerStack } from "./PromoBannerStack/PromoBannerStack"
+import { FlashSalesSection } from "./FlashSales/FlashSalesSection"
+import { FlashSalesProductList } from "./FlashSales/FlashSalesProductList"
+import { RecommendedProducts } from "./RecommendedProducts/RecommendedProducts"
 
 export {
   Hero,
@@ -26,4 +31,10 @@ export {
   ProductDetailsPage,
   AlgoliaProductsListing,
   OrdersPagination,
+  HeroCarousel,
+  PromoBannerStack,
+  FlashSalesSection,
+  FlashSalesProductList,
+  RecommendedProducts,
 }
+

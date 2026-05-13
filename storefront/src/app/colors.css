@@ -81,7 +81,7 @@
 }
 
 :root {
-    --bg-primary: var(--neutral-0);
+    --bg-primary: 242, 249, 245;
     --bg-secondary: var(--neutral-25);
     --bg-tertiary: var(--neutral-1000);
 

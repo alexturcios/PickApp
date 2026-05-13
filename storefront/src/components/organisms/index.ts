@@ -24,6 +24,8 @@ import { Addresses } from "./Addressess/Addresses"
 import { ReviewsToWrite } from "./Reviews/ReviewsToWrite"
 import { ReviewsWritten } from "./Reviews/ReviewsWritten"
 import { CartEmpty } from "./CartEmpty/CartEmpty"
+import { ProductGrid } from "./ProductGrid/ProductGrid"
+import { MobileHeader } from "./MobileHeader/MobileHeader"
 
 export {
   ProductCard,
@@ -52,4 +54,6 @@ export {
   ReviewsToWrite,
   ReviewsWritten,
   CartEmpty,
+  ProductGrid,
+  MobileHeader,
 }

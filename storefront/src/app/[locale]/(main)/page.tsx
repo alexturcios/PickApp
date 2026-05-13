@@ -1,11 +1,12 @@
 import {
-  BannerSection,
-  BlogSection,
-  Hero,
   HomeCategories,
-  HomeProductSection,
-  ShopByStyleSection,
+  HeroCarousel,
+  PromoBannerStack,
+  FlashSalesSection,
+  FlashSalesProductList,
+  RecommendedProducts,
 } from "@/components/sections"
+import { MobileHeader } from "@/components/organisms"
 
 import type { Metadata } from "next"
 import { headers } from "next/headers"
@@ -123,15 +124,8 @@ export default async function Home({
     "Mercur B2C Demo - Marketplace Storefront"
 
   return (
-    <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start text-primary">
-      <link
-        rel="preload"
-        as="image"
-        href="/images/hero/Image.jpg"
-        imageSrcSet="/images/hero/Image.jpg 700w"
-        imageSizes="(min-width: 1024px) 50vw, 100vw"
-      />
-      {/* Organization JSON-LD */}
+    <main className="flex flex-col gap-8 items-center text-primary bg-[#F2F9F5] min-h-screen">
+      {/* JSON-LD */}
       <Script
         id="ld-org"
         type="application/ld+json"
@@ -145,7 +139,6 @@ export default async function Home({
           }),
         }}
       />
-      {/* WebSite JSON-LD */}
       <Script
         id="ld-website"
         type="application/ld+json"
@@ -160,29 +153,29 @@ export default async function Home({
         }}
       />
 
-      <Hero
-        image="/images/hero/Image.jpg"
-        heading="Snag your style in a flash"
-        paragraph="Buy, sell, and discover pre-loved gems from the trendiest brands."
-        buttons={[
-          { label: "Buy now", path: "/categories" },
-          {
-            label: "Sell now",
-            path:
-              process.env.NEXT_PUBLIC_VENDOR_URL ||
-              "https://vendor.mercurjs.com",
-          },
-        ]}
-      />
-      <div className="px-4 lg:px-8 w-full">
-        <HomeProductSection heading="trending listings" locale={locale} home />
-      </div>
-      <div className="px-4 lg:px-8 w-full">
+      {/* Mobile Header (sticky, mobile only) */}
+      <MobileHeader />
+
+      {/* 1. Hero Carousel */}
+      <HeroCarousel />
+
+      {/* 2. Category Quick Links */}
+      <div className="w-full px-4 lg:px-8">
         <HomeCategories heading="SHOP BY CATEGORY" />
       </div>
-      <BannerSection />
-      <ShopByStyleSection />
-      <BlogSection />
+
+      {/* 3. Promotional Banner Stack */}
+      <PromoBannerStack />
+
+      {/* 4. Flash Sales */}
+      <FlashSalesSection />
+      <FlashSalesProductList />
+
+      {/* 5. Recommended Products */}
+      <RecommendedProducts />
+
+      {/* Bottom spacing */}
+      <div className="h-8" />
     </main>
   )
 }

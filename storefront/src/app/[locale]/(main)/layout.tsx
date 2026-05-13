@@ -24,7 +24,9 @@ export default async function RootLayout({
   if (!APP_ID || !user)
     return (
       <>
-        <Header />
+        <div className="hidden lg:block sticky top-0 z-40 bg-[#F2F9F5]">
+          <Header />
+        </div>
         {children}
         <Footer />
       </>
@@ -33,7 +35,9 @@ export default async function RootLayout({
   return (
     <>
       <Session appId={APP_ID} userId={user.id}>
-        <Header />
+        <div className="hidden lg:block sticky top-0 z-40 bg-[#F2F9F5]">
+          <Header />
+        </div>
         {children}
         <Footer />
       </Session>
