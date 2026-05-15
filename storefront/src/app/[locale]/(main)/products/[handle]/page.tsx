@@ -1,6 +1,6 @@
-import { ProductDetailsPage } from "@/components/sections"
-import { listProducts } from "@/lib/data/products"
-import { generateProductMetadata } from "@/lib/helpers/seo"
+import { AlgoliaProductDetailsPage } from "@/components/sections/ProductDetailsPage/AlgoliaProductDetailsPage"
+import { getAlgoliaProduct } from "@/lib/algolia-helpers"
+import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 
 export async function generateMetadata({
@@ -8,15 +8,15 @@ export async function generateMetadata({
 }: {
   params: Promise<{ handle: string; locale: string }>
 }): Promise<Metadata> {
-  const { handle, locale } = await params
+  const { handle } = await params
+  const prod = await getAlgoliaProduct(handle)
 
-  const prod = await listProducts({
-    countryCode: locale,
-    queryParams: { handle: [handle], limit: 1 },
-    forceCache: true,
-  }).then(({ response }) => response.products[0])
+  if (!prod) return { title: "Product Not Found" }
 
-  return generateProductMetadata(prod)
+  return {
+    title: `${prod.title} | Storefront`,
+    description: prod.description || `Buy ${prod.title}`,
+  }
 }
 
 export default async function ProductPage({
@@ -25,10 +25,15 @@ export default async function ProductPage({
   params: Promise<{ handle: string; locale: string }>
 }) {
   const { handle, locale } = await params
+  const prod = await getAlgoliaProduct(handle)
+
+  if (!prod) {
+    return notFound()
+  }
 
   return (
-    <main className="container">
-      <ProductDetailsPage handle={handle} locale={locale} />
+    <main className="container mx-auto px-4 py-8">
+      <AlgoliaProductDetailsPage product={prod} locale={locale} />
     </main>
   )
 }

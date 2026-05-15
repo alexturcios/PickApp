@@ -4,8 +4,10 @@ import { useHits } from "react-instantsearch"
 import Image from "next/image"
 import { getHitImage, getHitTitle, getHitPrice } from "@/lib/algolia-helpers"
 import { useState } from "react"
+import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
+import { useStore } from "@/lib/store/useStore"
 
-const RecommendedCard = ({ hit, index }: { hit: any; index: number }) => {
+export const RecommendedCard = ({ hit, index }: { hit: any; index: number }) => {
   const title = getHitTitle(hit)
   const image = getHitImage(hit)
   const price = getHitPrice(hit)
@@ -15,9 +17,24 @@ const RecommendedCard = ({ hit, index }: { hit: any; index: number }) => {
   const rating = (3.8 + Math.random() * 1.2).toFixed(1)
   const reviewCount = Math.floor(30 + Math.random() * 150)
   const [imgError, setImgError] = useState(false)
+  
+  const addToCart = useStore((state) => state.addToCart)
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    addToCart({
+      id: hit.objectID,
+      handle: hit.objectID,
+      title: title,
+      price: price,
+      image: image,
+      quantity: 1
+    })
+  }
 
   return (
-    <div className="bg-[#FFFFFF] rounded-[16px] shadow-[0_4px_12px_0_rgba(18,21,53,0.05)] border border-[#E6E6E6] overflow-hidden flex flex-col hover:shadow-[0_8px_24px_0_rgba(18,21,53,0.08)] transition-shadow">
+    <LocalizedClientLink href={`/products/${hit.objectID}`} className="bg-[#FFFFFF] rounded-[16px] shadow-[0_4px_12px_0_rgba(18,21,53,0.05)] border border-[#E6E6E6] overflow-hidden flex flex-col hover:shadow-[0_8px_24px_0_rgba(18,21,53,0.08)] transition-shadow">
       {/* Image with discount badge */}
       <div className="relative w-full aspect-square bg-[#F8F9FA] flex items-center justify-center">
         {discount > 0 && (
@@ -30,7 +47,7 @@ const RecommendedCard = ({ hit, index }: { hit: any; index: number }) => {
           alt={title}
           fill
           sizes="(min-width: 640px) 50vw, 100vw"
-          className={imgError ? "object-contain p-4" : "object-cover"}
+          className={imgError ? "object-contain p-4 group-hover:scale-105 transition-transform duration-300" : "object-cover group-hover:scale-105 transition-transform duration-300"}
           onError={() => setImgError(true)}
         />
       </div>
@@ -38,7 +55,7 @@ const RecommendedCard = ({ hit, index }: { hit: any; index: number }) => {
       {/* Details */}
       <div className="p-3 flex flex-col gap-1 flex-1">
         {/* Title */}
-        <h3 className="text-[14px] text-[#121535] font-semibold tracking-[-0.0170em] line-clamp-2 leading-tight">{title}</h3>
+        <h3 className="text-[14px] text-[#121535] font-semibold tracking-[-0.0170em] line-clamp-2 leading-tight group-hover:text-[#299E60] transition-colors">{title}</h3>
 
         {/* Vendor */}
         <div className="flex items-center gap-1">
@@ -61,17 +78,20 @@ const RecommendedCard = ({ hit, index }: { hit: any; index: number }) => {
               </svg>
             ))}
           </div>
-          <span className="text-[11px] text-[#6C757D]">({reviewCount})</span>
+          <span className="text-[10px] text-[#6C757D]">({reviewCount})</span>
         </div>
       </div>
 
-      {/* Add to cart button */}
-      <div className="p-3 pt-0">
-        <button className="w-full py-2.5 bg-[#FF6B35] text-white font-semibold text-[13px] rounded-[50px] shadow-[0_6px_16px_0_rgba(255,107,53,0.25)] hover:bg-[#e85a28] transition-colors">
+      {/* Actions */}
+      <div className="p-3 pt-0 mt-auto">
+        <button 
+          onClick={handleAddToCart}
+          className="w-full py-2 bg-[#FF6B35] text-white font-semibold text-[13px] rounded-[50px] shadow-[0_4px_12px_0_rgba(255,107,53,0.2)] hover:bg-[#e85a28] transition-colors"
+        >
           Add To Cart
         </button>
       </div>
-    </div>
+    </LocalizedClientLink>
   )
 }
 

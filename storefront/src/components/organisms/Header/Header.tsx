@@ -10,6 +10,7 @@ import { retrieveCustomer } from "@/lib/data/customer"
 import { getUserWishlists } from "@/lib/data/wishlist"
 import { Wishlist } from "@/types/wishlist"
 import { Badge } from "@/components/atoms"
+import { WishlistBadge } from "@/components/atoms/WishlistBadge/WishlistBadge"
 import CountrySelector from "@/components/molecules/CountrySelector/CountrySelector"
 import { listRegions } from "@/lib/data/regions"
 import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
@@ -65,11 +66,7 @@ export const Header = async () => {
           {user && (
             <LocalizedClientLink href="/user/wishlist" className="relative">
               <HeartIcon size={20} />
-              {Boolean(wishlistCount) && (
-                <Badge className="absolute -top-2 -right-2 w-4 h-4 p-0">
-                  {wishlistCount}
-                </Badge>
-              )}
+              <WishlistBadge />
             </LocalizedClientLink>
           )}
 

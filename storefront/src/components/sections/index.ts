@@ -16,6 +16,7 @@ import { PromoBannerStack } from "./PromoBannerStack/PromoBannerStack"
 import { FlashSalesSection } from "./FlashSales/FlashSalesSection"
 import { FlashSalesProductList } from "./FlashSales/FlashSalesProductList"
 import { RecommendedProducts } from "./RecommendedProducts/RecommendedProducts"
+import { SearchResults } from "./SearchResults/SearchResults"
 
 export {
   Hero,
@@ -36,5 +37,6 @@ export {
   FlashSalesSection,
   FlashSalesProductList,
   RecommendedProducts,
+  SearchResults,
 }
 
