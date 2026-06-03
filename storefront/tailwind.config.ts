@@ -9,6 +9,26 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-gtstandard)", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-shopify)", "Poppins", "ui-sans-serif", "system-ui", "sans-serif"],
+        shopify: ["var(--font-shopify)", "Poppins", "ui-sans-serif", "system-ui", "sans-serif"],
+      },
+      boxShadow: {
+        card: "rgba(18, 21, 53, 0.05) 0px 4px 12px 0px",
+        "card-hover": "rgba(18, 21, 53, 0.08) 0px 8px 24px 0px",
+        cta: "rgba(255, 107, 53, 0.25) 0px 6px 16px 0px",
+        brand: "rgba(41, 158, 96, 0.2) 0px 6px 16px 0px",
+      },
+      keyframes: {
+        "shop-marquee": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        marquee: "shop-marquee 40s linear infinite",
+      },
       backgroundColor: {
         primary: "rgba(var(--bg-primary))",
         secondary: "rgba(var(--bg-secondary))",
@@ -73,6 +93,23 @@ export default {
         secondary: "rgba(var(--content-secondary))",
         tertiary: "rgba(var(--content-tertiary))",
         disabled: "rgba(var(--content-disabled))",
+        /* Design.md — explicit 60/30/10 palette tokens */
+        canvas: "#F2F9F5",
+        surface: "#FFFFFF",
+        ink: "#121535",
+        muted: "#6C757D",
+        alert: "#E63946",
+        gold: "#FFB800",
+        "brand-green": {
+          DEFAULT: "#299E60",
+          hover: "#1e8a52",
+          pressed: "#1a7848",
+        },
+        "action-orange": {
+          DEFAULT: "#FF6B35",
+          hover: "#e85a28",
+          pressed: "#c84b1e",
+        },
         action: {
           DEFAULT: "rgba(var(--content-action-primary))",
           hover: "rgba(var(--content-action-primary-hover))",
@@ -109,6 +146,7 @@ export default {
         DEFAULT: "rgba(var(--border-primary))",
         secondary: "rgba(var(--border-secondary))",
         action: "rgba(var(--border-action))",
+        line: "#E6E6E6",
         negative: {
           DEFAULT: "rgba(var(--border-negative-primary))",
           secondary: "rgba(var(--border-negative-secondary))",
@@ -127,6 +165,8 @@ export default {
         xs: "4px",
         sm: "8px",
         md: "16px",
+        card: "16px",
+        pill: "50px",
         full: "1000px",
       },
       fill: {

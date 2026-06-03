@@ -4,6 +4,7 @@ import { SelectField } from "./SelectField/SelectField"
 import { Accordion } from "./Accordion/Accordion"
 import { FilterCheckboxOption } from "./FilterCheckboxOption/FilterCheckboxOption"
 import { NavbarSearch } from "./NavbarSearch/NavbarSearch"
+import { SearchBar } from "./SearchBar/SearchBar"
 import { GalleryCarouselItem } from "./GalleryCarouselItem/GalleryCarouselItem"
 import { ProductPageAccordion } from "./ProductPageAccordion/ProductPageAccordion"
 import { SellerReview } from "./SellerReview/SellerReview"
@@ -40,6 +41,7 @@ export {
   Accordion,
   FilterCheckboxOption,
   NavbarSearch,
+  SearchBar,
   GalleryCarouselItem,
   ProductPageAccordion,
   SellerReview,

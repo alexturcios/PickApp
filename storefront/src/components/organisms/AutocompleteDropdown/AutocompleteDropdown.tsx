@@ -91,19 +91,21 @@ const RecentSearches = ({ onSelect }: { onSelect: (q: string) => void }) => {
 export const AutocompleteDropdown = ({
   isOpen,
   onClose,
-  onSubmit
+  onSubmit,
+  openUpward = false,
 }: {
   isOpen: boolean
   onClose: () => void
   onSubmit: () => void
+  openUpward?: boolean
 }) => {
   const { query, refine } = useSearchBox()
   const { hits } = useHits()
-  
+
   if (!isOpen) return null;
 
   return (
-    <div className="absolute top-full left-0 mt-2 w-full max-w-[800px] min-w-[600px] bg-[#FFFFFF] rounded-[16px] shadow-[0_8px_24px_0_rgba(18,21,53,0.15)] border border-[#E6E6E6] z-50 overflow-hidden flex flex-col md:flex-row">
+    <div className={`absolute left-0 w-full md:w-[min(800px,90vw)] md:min-w-[600px] bg-[#FFFFFF] rounded-[16px] shadow-[0_8px_24px_0_rgba(18,21,53,0.15)] border border-[#E6E6E6] z-50 overflow-hidden flex flex-col md:flex-row ${openUpward ? "bottom-full mb-2" : "top-full mt-2"}`}>
       {/* Left Sidebar */}
       <div className="w-full md:w-[35%] bg-[#FFFFFF] p-6 border-b md:border-b-0 md:border-r border-[#E6E6E6] flex flex-col max-h-[500px] overflow-y-auto">
         {query ? (

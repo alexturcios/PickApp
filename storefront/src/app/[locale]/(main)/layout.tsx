@@ -1,4 +1,6 @@
-import { Footer, Header } from "@/components/organisms"
+import { Footer, Header, MobileHeader } from "@/components/organisms"
+import { Sidebar } from "@/components/organisms/Sidebar/Sidebar"
+import { SearchBar } from "@/components/molecules/SearchBar/SearchBar"
 import { retrieveCustomer } from "@/lib/data/customer"
 import { checkRegion } from "@/lib/helpers/check-region"
 import { Session } from "@talkjs/react"
@@ -21,26 +23,37 @@ export default async function RootLayout({
     return redirect("/")
   }
 
-  if (!APP_ID || !user)
-    return (
-      <>
-        <div className="hidden lg:block sticky top-0 z-40 bg-[#F2F9F5]">
+  const shell = (
+    <>
+      {/* Desktop icon rail */}
+      <Sidebar />
+
+      {/* Mobile sticky header */}
+      <MobileHeader />
+
+      {/* Content column, offset for the rail on desktop */}
+      <div className="md:pl-[76px] min-h-screen flex flex-col bg-canvas">
+        <div className="hidden lg:block sticky top-0 z-30 bg-canvas">
           <Header />
         </div>
-        {children}
+        <div className="flex-1">{children}</div>
         <Footer />
-      </>
-    )
+      </div>
+
+      {/* Sticky floating search pill (wired to live Algolia search) */}
+      <div className="pointer-events-none fixed inset-x-0 bottom-5 z-30 flex justify-center px-4 md:pl-[76px]">
+        <div className="pointer-events-auto w-full max-w-[560px]">
+          <SearchBar floating />
+        </div>
+      </div>
+    </>
+  )
+
+  if (!APP_ID || !user) return shell
 
   return (
-    <>
-      <Session appId={APP_ID} userId={user.id}>
-        <div className="hidden lg:block sticky top-0 z-40 bg-[#F2F9F5]">
-          <Header />
-        </div>
-        {children}
-        <Footer />
-      </Session>
-    </>
+    <Session appId={APP_ID} userId={user.id}>
+      {shell}
+    </Session>
   )
 }

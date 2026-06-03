@@ -1,13 +1,13 @@
 import {
   HomeCategories,
-  HeroCarousel,
+  HeroMarquee,
+  CategoryPills,
   PromoBannerStack,
   FlashSalesSection,
   FlashSalesProductList,
   RecommendedProducts,
 } from "@/components/sections"
-import { MobileHeader } from "@/components/organisms"
-
+import { TopBanner } from "@/components/cells"
 import type { Metadata } from "next"
 import { headers } from "next/headers"
 import Script from "next/script"
@@ -124,7 +124,7 @@ export default async function Home({
     "Mercur B2C Demo - Marketplace Storefront"
 
   return (
-    <main className="flex flex-col gap-8 items-center text-primary bg-[#F2F9F5] min-h-screen">
+    <main className="flex flex-col gap-10 items-center text-ink bg-canvas min-h-screen pb-24">
       {/* JSON-LD */}
       <Script
         id="ld-org"
@@ -153,29 +153,33 @@ export default async function Home({
         }}
       />
 
-      {/* Mobile Header (sticky, mobile only) */}
-      <MobileHeader />
+      {/* Marketing banner */}
+      <div className="w-full px-4 pt-3 lg:px-8">
+        <TopBanner />
+      </div>
 
-      {/* 1. Hero Carousel */}
-      <HeroCarousel />
+      {/* 1. Hero — drifting marquee of live products + wordmark + search */}
+      <HeroMarquee />
 
-      {/* 2. Category Quick Links */}
+      {/* 2. Category pills (Shop-style) */}
+      <div className="w-full">
+        <CategoryPills />
+      </div>
+
+      {/* 3. Category circles (Design.md) */}
       <div className="w-full px-4 lg:px-8">
         <HomeCategories heading="SHOP BY CATEGORY" />
       </div>
 
-      {/* 3. Promotional Banner Stack */}
+      {/* 4. Promotional Banner Stack */}
       <PromoBannerStack />
 
-      {/* 4. Flash Sales */}
+      {/* 5. Flash Sales */}
       <FlashSalesSection />
       <FlashSalesProductList />
 
-      {/* 5. Recommended Products */}
+      {/* 6. Recommended Products */}
       <RecommendedProducts />
-
-      {/* Bottom spacing */}
-      <div className="h-8" />
     </main>
   )
 }

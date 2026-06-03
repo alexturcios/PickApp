@@ -17,6 +17,8 @@ import { FlashSalesSection } from "./FlashSales/FlashSalesSection"
 import { FlashSalesProductList } from "./FlashSales/FlashSalesProductList"
 import { RecommendedProducts } from "./RecommendedProducts/RecommendedProducts"
 import { SearchResults } from "./SearchResults/SearchResults"
+import { HeroMarquee } from "./HeroMarquee/HeroMarquee"
+import { CategoryPills } from "./CategoryPills/CategoryPills"
 
 export {
   Hero,
@@ -38,5 +40,7 @@ export {
   FlashSalesProductList,
   RecommendedProducts,
   SearchResults,
+  HeroMarquee,
+  CategoryPills,
 }
 

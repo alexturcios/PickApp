@@ -26,6 +26,7 @@ import { ReviewsWritten } from "./Reviews/ReviewsWritten"
 import { CartEmpty } from "./CartEmpty/CartEmpty"
 import { ProductGrid } from "./ProductGrid/ProductGrid"
 import { MobileHeader } from "./MobileHeader/MobileHeader"
+import { Sidebar } from "./Sidebar/Sidebar"
 
 export {
   ProductCard,
@@ -56,4 +57,5 @@ export {
   CartEmpty,
   ProductGrid,
   MobileHeader,
+  Sidebar,
 }

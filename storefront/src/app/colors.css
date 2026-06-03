@@ -14,18 +14,18 @@
     --neutral-900: 22, 22, 22;
     --neutral-1000: 9, 9, 9;
 
-    /* Brand colors are used across all interactive elements such as buttons, links, inputs, etc. This color can define the overall feel and can elicit emotion. */
-    --brand-25: 247, 247, 247;
-    --brand-50: 238, 238, 238;
-    --brand-100: 226, 226, 226;
-    --brand-200: 198, 198, 198;
-    --brand-300: 163, 163, 163;
-    --brand-400: 115, 115, 115;
-    --brand-500: 82, 82, 82;
-    --brand-600: 64, 64, 64;
-    --brand-700: 27, 27, 27;
-    --brand-800: 22, 22, 22;
-    --brand-900: 9, 9, 9;
+    /* Brand colors — Pickapp Brand Green (#299E60) ramp. Used across links, nav, trust indicators, borders. */
+    --brand-25: 239, 249, 244;
+    --brand-50: 220, 242, 230;
+    --brand-100: 190, 230, 208;
+    --brand-200: 150, 213, 180;
+    --brand-300: 110, 196, 150;
+    --brand-400: 70, 178, 122;
+    --brand-500: 41, 158, 96;
+    --brand-600: 33, 138, 84;
+    --brand-700: 26, 120, 71;
+    --brand-800: 30, 138, 82;
+    --brand-900: 41, 158, 96;
     
     /* Red colors are used across error states and in "destructive" actions. */
     --red-25: 254, 243, 242;
@@ -92,9 +92,10 @@
     --bg-component-secondary-hover: var(--neutral-50);
     --bg-component-secondary-pressed: var(--neutral-100);
 
-    --bg-action-primary: var(--brand-900);
-    --bg-action-primary-hover: var(--brand-800);
-    --bg-action-primary-pressed: var(--brand-700);
+    /* Primary CTA — Action Orange (#FF6B35), the 10% conversion accent */
+    --bg-action-primary: 255, 107, 53;
+    --bg-action-primary-hover: 232, 90, 40;
+    --bg-action-primary-pressed: 200, 75, 30;
     --bg-action-secondary: rgba(var(--neutral-1000), 0.05);
     --bg-action-secondary-hover: rgba(var(--neutral-1000), 0.1);
     --bg-action-secondary-pressed: rgba(var(--neutral-1000), 0.2);
@@ -125,8 +126,8 @@
 
     --bg-disabled: var(--neutral-200);
 
-    --content-primary: var(--neutral-1000);
-    --content-secondary: var(--neutral-500);
+    --content-primary: 18, 21, 53;
+    --content-secondary: 108, 117, 125;
     --content-tertiary: var(--neutral-0);
 
     --content-action-primary: var(--brand-900);
@@ -150,7 +151,7 @@
 
     --content-disabled: var(--neutral-400);
 
-    --border-primary: var(--neutral-50);
+    --border-primary: 230, 230, 230;
     --border-secondary: var(--neutral-800);
     --border-action: var(--brand-900);
     --border-negative-primary: var(--red-700);

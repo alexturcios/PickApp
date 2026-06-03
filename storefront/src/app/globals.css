@@ -121,12 +121,19 @@ button:disabled svg path {
     #00438f 360deg
   );
 }
-.no-scrollbar::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
-.no-scrollbar {
+.no-scrollbar,
+.scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Hero card marquee (drifting product cards) */
+.marquee-track:hover .animate-marquee {
+  animation-play-state: paused;
 }
 .product-details {
   @apply text-md;
