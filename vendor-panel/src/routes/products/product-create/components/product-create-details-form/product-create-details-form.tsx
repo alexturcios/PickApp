@@ -8,6 +8,7 @@ import {
 } from "../../../../../extensions"
 import { ProductCreateSchemaType } from "../../types"
 import { ProductCreateGeneralSection } from "./components/product-create-details-general-section"
+import { ProductCreateLockerSizeSection } from "./components/product-create-locker-size-section/product-create-locker-size-section"
 import { ProductCreateMediaSection } from "./components/product-create-details-media-section"
 import { ProductCreateVariantsSection } from "./components/product-create-details-variant-section"
 
@@ -28,6 +29,8 @@ export const ProductCreateDetailsForm = ({ form }: ProductAttributesProps) => {
           <FormExtensionZone fields={fields} form={form} />
           <ProductCreateMediaSection form={form} />
         </div>
+        <Divider />
+        <ProductCreateLockerSizeSection form={form} />
         <Divider />
         <ProductCreateVariantsSection form={form} />
       </div>

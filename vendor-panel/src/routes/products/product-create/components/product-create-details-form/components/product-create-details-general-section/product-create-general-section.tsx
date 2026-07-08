@@ -3,7 +3,6 @@ import { UseFormReturn } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
 import { Form } from "../../../../../../../components/common/form"
-import { HandleInput } from "../../../../../../../components/inputs/handle-input"
 import { ProductCreateSchemaType } from "../../../../types"
 
 type ProductCreateGeneralSectionProps = {
@@ -18,7 +17,8 @@ export const ProductCreateGeneralSection = ({
   return (
     <div id="general" className="flex flex-col gap-y-6">
       <div className="flex flex-col gap-y-2">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        {/* El "handle" (slug) se genera solo en el backend — nunca se le muestra al vendedor. */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <Form.Field
             control={form.control}
             name="title"
@@ -27,7 +27,10 @@ export const ProductCreateGeneralSection = ({
                 <Form.Item>
                   <Form.Label>{t("products.fields.title.label")}</Form.Label>
                   <Form.Control>
-                    <Input {...field} placeholder="Winter jacket" />
+                    <Input
+                      {...field}
+                      placeholder="Ej. Ropa de lino hecha en Valle de Ángeles"
+                    />
                   </Form.Control>
                 </Form.Item>
               )
@@ -43,26 +46,10 @@ export const ProductCreateGeneralSection = ({
                     {t("products.fields.subtitle.label")}
                   </Form.Label>
                   <Form.Control>
-                    <Input {...field} placeholder="Warm and cosy" />
-                  </Form.Control>
-                </Form.Item>
-              )
-            }}
-          />
-          <Form.Field
-            control={form.control}
-            name="handle"
-            render={({ field }) => {
-              return (
-                <Form.Item>
-                  <Form.Label
-                    tooltip={t("products.fields.handle.tooltip")}
-                    optional
-                  >
-                    {t("fields.handle")}
-                  </Form.Label>
-                  <Form.Control>
-                    <HandleInput {...field} placeholder="winter-jacket" />
+                    <Input
+                      {...field}
+                      placeholder="Ej. Hecho a mano con lino 100% natural"
+                    />
                   </Form.Control>
                 </Form.Item>
               )
@@ -80,7 +67,10 @@ export const ProductCreateGeneralSection = ({
                 {t("products.fields.description.label")}
               </Form.Label>
               <Form.Control>
-                <Textarea {...field} placeholder="A warm and cozy jacket" />
+                <Textarea
+                  {...field}
+                  placeholder="Ej. Termo personalizado de acero, 750 ml, con grabado a tu gusto. Entrega en lockers cerca de Mall Multiplaza o Bulevar Morazán."
+                />
               </Form.Control>
             </Form.Item>
           )

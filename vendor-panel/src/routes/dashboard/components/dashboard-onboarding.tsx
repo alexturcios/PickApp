@@ -26,19 +26,18 @@ export const DashboardOnboarding = ({
     <Container className="divide-y p-0">
       <div className="flex items-center justify-between px-6 py-4">
         <div>
-          <Heading>Welcome to Mercur marketplace</Heading>
+          <Heading>¡Bienvenido a Pickapp!</Heading>
           <Text className="text-ui-fg-subtle" size="small">
-            Please complete these steps so you can start selling on the
-            marketplace
+            Completa estos pasos para que tu tienda esté lista para vender
           </Text>
         </div>
       </div>
       <div className="px-6 py-4">
         <OnboardingRow
-          label="Complete the store information"
+          label="Completa la información de tu tienda"
           state={store_information}
           link="/settings/store"
-          buttonLabel="Manage"
+          buttonLabel="Completar"
         />
         {/* <OnboardingRow
           label='Setup Stripe Connect account'
@@ -47,16 +46,16 @@ export const DashboardOnboarding = ({
           buttonLabel='Setup'
         /> */}
         <OnboardingRow
-          label="Setup Locations & Shipping"
+          label="Configura tus puntos de entrega"
           state={locations_shipping}
           link="/settings/locations"
-          buttonLabel="Setup"
+          buttonLabel="Configurar"
         />
         <OnboardingRow
-          label="Add products and start selling"
+          label="Agrega productos y empieza a vender"
           state={products}
           link="/products/create"
-          buttonLabel="Add"
+          buttonLabel="Agregar"
         />
       </div>
     </Container>

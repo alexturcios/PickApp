@@ -10,6 +10,8 @@ export const defaultI18nOptions: InitOptions = {
     lookupLocalStorage: "lng",
     order: ["cookie", "localStorage", "header"],
   },
+  // Pickapp vendors operate in Tegucigalpa — the panel is Spanish-first.
+  lng: "es",
   fallbackLng: "en",
   interpolation: {
     escapeValue: false,

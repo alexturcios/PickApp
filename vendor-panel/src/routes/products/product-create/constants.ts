@@ -1,5 +1,6 @@
 import { z } from "zod"
 import { i18n } from "../../../components/utilities/i18n/i18n"
+import { IMAGE_REQUIRED_MESSAGE } from "../../../lib/pickapp/simple-product"
 import { optionalFloat, optionalInt } from "../../../lib/validation"
 import { decorateVariantsWithDefaultValues } from "./utils"
 
@@ -89,6 +90,15 @@ export const ProductCreateSchema = z
     media: z.array(MediaSchema).optional(),
   })
   .superRefine((data, ctx) => {
+    // Guardia Pickapp: ningún producto se guarda sin al menos una imagen.
+    if (!data.media || data.media.length === 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["media"],
+        message: IMAGE_REQUIRED_MESSAGE,
+      })
+    }
+
     if (data.variants.every((v) => !v.should_create)) {
       return ctx.addIssue({
         code: z.ZodIssueCode.custom,

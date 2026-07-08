@@ -1,6 +1,7 @@
 import { Spinner } from "@medusajs/icons"
 import { Navigate, Outlet, useLocation } from "react-router-dom"
 import { useMe } from "../../../hooks/api/users"
+import { OnboardingGate } from "../../pickapp/onboarding-gate"
 import { SearchProvider } from "../../../providers/search-provider"
 import { SidebarProvider } from "../../../providers/sidebar-provider"
 import { TalkjsProvider } from "../../../providers/talkjs-provider"
@@ -31,7 +32,9 @@ export const ProtectedRoute = () => {
     <TalkjsProvider>
       <SidebarProvider>
         <SearchProvider>
-          <Outlet />
+          <OnboardingGate>
+            <Outlet />
+          </OnboardingGate>
         </SearchProvider>
       </SidebarProvider>
     </TalkjsProvider>

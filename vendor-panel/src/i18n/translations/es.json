@@ -404,7 +404,7 @@
       "errors": {
         "variants": "Por favor, selecciona al menos una variante.",
         "options": "Por favor, crea al menos una opción.",
-        "uniqueSku": "El SKU debe ser único."
+        "uniqueSku": "El código de inventario debe ser único."
       },
       "inventory": {
         "heading": "Kits de inventario",
@@ -1014,7 +1014,7 @@
         "confirmedSuccessfully": "Edición de pedido confirmada"
       },
       "validation": {
-        "quantityLowerThanFulfillment": "No se puede establecer la cantidad menor o igual a la cantidad cumplida"
+        "quantityLowerThanFulfillment": "No se puede establecer la cantidad menor o igual a la cantidad ya entregada"
       }
     },
     "returns": {
@@ -1174,7 +1174,7 @@
       }
     },
     "shipment": {
-      "title": "Marcar cumplimiento enviado",
+      "title": "Marcar entrega en locker enviada",
       "trackingNumber": "Número de seguimiento",
       "addTracking": "Agregar número de seguimiento",
       "sendNotification": "Enviar notificación",
@@ -1182,24 +1182,24 @@
       "toastCreated": "Envío creado correctamente."
     },
     "fulfillment": {
-      "cancelWarning": "Estás a punto de cancelar un cumplimiento. Esta acción no puede deshacerse.",
-      "markAsDeliveredWarning": "Estás a punto de marcar el cumplimiento como entregado. Esta acción no puede deshacerse.",
+      "cancelWarning": "Estás a punto de cancelar una entrega en locker. Esta acción no puede deshacerse.",
+      "markAsDeliveredWarning": "Estás a punto de marcar la entrega en locker como entregado. Esta acción no puede deshacerse.",
       "unfulfilledItems": "Artículos no cumplidos",
-      "statusLabel": "Estado del cumplimiento",
-      "statusTitle": "Estado del cumplimiento",
+      "statusLabel": "Estado dla entrega en locker",
+      "statusTitle": "Estado dla entrega en locker",
       "fulfillItems": "Cumplir artículos",
-      "awaitingFulfillmentBadge": "Esperando cumplimiento",
+      "awaitingFulfillmentBadge": "Pendiente de entregar en locker",
       "requiresShipping": "Requiere envío",
-      "number": "Cumplimiento #{{number}}",
+      "number": "Entrega en locker #{{number}}",
       "itemsToFulfill": "Artículos a cumplir",
-      "create": "Crear Cumplimiento",
+      "create": "Crear Entrega en locker",
       "available": "Disponible",
       "inStock": "En stock",
       "markAsShipped": "Marcar como enviado",
       "markAsDelivered": "Marcar como entregado",
       "itemsToFulfillDesc": "Elige los artículos y las cantidades para cumplir",
       "locationDescription": "Elige de qué ubicación deseas cumplir los artículos.",
-      "sendNotificationHint": "Notificar a los clientes sobre el cumplimiento creado.",
+      "sendNotificationHint": "Notificar a los clientes sobre la entrega en locker creada.",
       "methodDescription": "Elige un método de envío diferente al seleccionado por el cliente",
       "error": {
         "wrongQuantity": "Solo hay un artículo disponible para cumplir",
@@ -1220,10 +1220,10 @@
         "requiresAction": "Requiere acción"
       },
       "toast": {
-        "created": "Cumplimiento creado correctamente",
-        "canceled": "Cumplimiento cancelado correctamente",
-        "fulfillmentShipped": "No se puede cancelar un cumplimiento ya enviado",
-        "fulfillmentDelivered": "Cumplimiento marcado como entregado correctamente"
+        "created": "Entrega en locker creada correctamente",
+        "canceled": "Entrega en locker cancelada correctamente",
+        "fulfillmentShipped": "No se puede cancelar una entrega en locker ya enviado",
+        "fulfillmentDelivered": "Entrega en locker marcada como entregado correctamente"
       },
       "trackingLabel": "Seguimiento",
       "shippingFromLabel": "Enviado desde",
@@ -1279,7 +1279,7 @@
         },
         "fulfillment": {
           "created": "Artículos cumplidos",
-          "canceled": "Cumplimiento cancelado",
+          "canceled": "Entrega en locker cancelada",
           "shipped": "Artículos enviados",
           "delivered": "Artículos entregados",
           "items_one": "{{count}} artículo",
@@ -1381,13 +1381,13 @@
       "confirmation": "Estás a punto de eliminar la ubicación de inventario {{name}}. Esta acción no puede deshacerse."
     },
     "fulfillmentProviders": {
-      "header": "Proveedores de Cumplimiento",
+      "header": "Proveedores de Entrega",
       "shippingOptionsTooltip": "Este menú desplegable solo consistirá en proveedores habilitados para esta ubicación. Agréguelos a la ubicación si el menú desplegable está deshabilitado.",
-      "label": "Proveedores de cumplimiento conectados",
-      "connectedTo": "Conectado a {{count}} de {{total}} proveedores de cumplimiento",
-      "noProviders": "Esta Ubicación de Inventario no está conectada a ningún proveedor de cumplimiento.",
+      "label": "Proveedores de entrega en locker conectados",
+      "connectedTo": "Conectado a {{count}} de {{total}} proveedores de entrega",
+      "noProviders": "Esta Ubicación de Inventario no está conectada a ningún proveedor de entrega.",
       "action": "Conectar Proveedores",
-      "successToast": "Proveedores de cumplimiento para la ubicación de inventario actualizados correctamente."
+      "successToast": "Proveedores de entrega en locker para la ubicación de inventario actualizados correctamente."
     },
     "fulfillmentSets": {
       "pickup": {
@@ -1469,7 +1469,7 @@
             },
             "calculated": {
               "label": "Calculado",
-              "hint": "El precio de la opción de envío es calculado por el proveedor de cumplimiento durante el proceso de pago."
+              "hint": "El precio de la opción de envío es calculado por el proveedor de entrega durante el proceso de pago."
             }
           }
         },
@@ -1477,7 +1477,7 @@
           "label": "Habilitar en tienda",
           "hint": "Si los clientes pueden usar esta opción durante el proceso de pago."
         },
-        "provider": "Proveedor de cumplimiento",
+        "provider": "Proveedor de entrega",
         "profile": "Perfil de envío"
       }
     },
@@ -2219,7 +2219,7 @@
       "createShippingOption": "Crear Opción de Envío",
       "createShippingOptionHint": "Crea una nueva opción de envío para la región.",
       "editShippingOption": "Editar Opción de Envío",
-      "fulfillmentMethod": "Método de Cumplimiento",
+      "fulfillmentMethod": "Método de Entrega",
       "type": {
         "outbound": "Envío",
         "outboundHint": "Usa esto si estás creando una opción de envío para enviar productos al cliente.",
@@ -2441,7 +2441,10 @@
         "placeholder": "wrong_size",
         "tooltip": "El valor debe ser un identificador único para la razón de devolución."
       },
-      "label": { "label": "Etiqueta", "placeholder": "Tamaño incorrecto" },
+      "label": {
+        "label": "Etiqueta",
+        "placeholder": "Tamaño incorrecto"
+      },
       "description": {
         "label": "Descripción",
         "placeholder": "El cliente recibió el tamaño incorrecto"
@@ -2669,8 +2672,8 @@
     "countries": "Países",
     "paymentProviders": "Proveedores de pago",
     "refundReason": "Razón de reembolso",
-    "fulfillmentProviders": "Proveedores de cumplimiento",
-    "fulfillmentProvider": "Proveedor de cumplimiento",
+    "fulfillmentProviders": "Proveedores de entrega en locker",
+    "fulfillmentProvider": "Proveedor de entrega",
     "providers": "Proveedores",
     "availability": "Disponibilidad",
     "inventory": "Inventario",
@@ -2707,7 +2710,7 @@
     "customer": "Cliente",
     "date": "Fecha",
     "order": "Pedido",
-    "fulfillment": "Cumplimiento",
+    "fulfillment": "Entrega en locker",
     "provider": "Proveedor",
     "payment": "Pago",
     "items": "Artículos",
@@ -2743,7 +2746,7 @@
     "countryOfOrigin": "País de origen",
     "material": "Material",
     "thumbnail": "Miniatura",
-    "sku": "SKU",
+    "sku": "Código de inventario",
     "managedInventory": "Inventario gestionado",
     "allowBackorder": "Permitir pedido pendiente",
     "inStock": "En stock",
@@ -2781,5 +2784,10 @@
     "minutes_other": "Minutos",
     "seconds_one": "Segundo",
     "seconds_other": "Segundos"
+  },
+  "register": {
+    "title": "Únete a Pickapp como vendedor",
+    "hint": "Crea tu cuenta y empieza a vender en Tegucigalpa",
+    "alreadySeller": "¿Ya tienes una cuenta? - <0>Inicia sesión</0>"
   }
 }

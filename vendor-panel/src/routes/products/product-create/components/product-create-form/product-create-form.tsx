@@ -1,6 +1,6 @@
-import { Button, ProgressStatus, ProgressTabs, toast } from "@medusajs/ui"
+import { Alert, Button, ProgressStatus, ProgressTabs, toast } from "@medusajs/ui"
 import { HttpTypes } from "@medusajs/types"
-import { useEffect, useMemo, useState } from "react"
+import { ReactNode, useEffect, useMemo, useState } from "react"
 import { useWatch } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import {
@@ -14,6 +14,11 @@ import {
 } from "../../../../../extensions"
 import { useCreateProduct } from "../../../../../hooks/api/products"
 import { uploadFilesQuery } from "../../../../../lib/client"
+import {
+  buildAdvancedProductPayload,
+  hasProductImage,
+} from "../../../../../lib/pickapp/advanced-product"
+import { IMAGE_REQUIRED_MESSAGE } from "../../../../../lib/pickapp/simple-product"
 import {
   PRODUCT_CREATE_FORM_DEFAULTS,
   ProductCreateSchema,
@@ -40,11 +45,14 @@ type ProductCreateFormProps = {
   defaultChannel?: HttpTypes.AdminSalesChannel
   store?: HttpTypes.AdminStore
   pricePreferences?: HttpTypes.AdminPricePreference[]
+  /** Selector Flujo Simple / Avanzado / Carga Masiva mostrado en el encabezado */
+  modeSwitcher?: ReactNode
 }
 
 export const ProductCreateForm = ({
   defaultChannel,
   store,
+  modeSwitcher,
 }: ProductCreateFormProps) => {
   const [tab, setTab] = useState<Tab>(Tab.DETAILS)
   const [tabState, setTabState] = useState<TabState>({
@@ -92,12 +100,28 @@ export const ProductCreateForm = ({
     name: "variants",
   })
 
+  const watchedMedia = useWatch({
+    control: form.control,
+    name: "media",
+  })
+
+  const hasImage = hasProductImage(watchedMedia)
+
   const showInventoryTab = useMemo(
     () => watchedVariants.some((v) => v.manage_inventory && v.inventory_kit),
     [watchedVariants]
   )
 
   const handleSubmit = form.handleSubmit(async (values, e) => {
+    // Guardia dura: sin imagen jamás se despacha la creación al backend.
+    if (!hasProductImage(values.media)) {
+      form.setError("media", {
+        type: "manual",
+        message: IMAGE_REQUIRED_MESSAGE,
+      })
+      return
+    }
+
     let isDraftSubmission = false
 
     if (e?.nativeEvent instanceof SubmitEvent) {
@@ -106,7 +130,6 @@ export const ProductCreateForm = ({
     }
 
     const media = values.media || []
-    const payload = { ...values, media: undefined }
 
     let uploadedMedia: (HttpTypes.AdminFile & {
       isThumbnail: boolean
@@ -147,41 +170,11 @@ export const ProductCreateForm = ({
     }
 
     await mutateAsync(
-      {
-        ...payload,
-        status: isDraftSubmission ? "draft" : "proposed",
-        images: uploadedMedia,
-        weight: parseInt(payload.weight || "") || undefined,
-        length: parseInt(payload.length || "") || undefined,
-        height: parseInt(payload.height || "") || undefined,
-        width: parseInt(payload.width || "") || undefined,
-        type_id: payload.type_id || undefined,
-        tags:
-          payload.tags?.map((tag) => ({
-            id: tag,
-          })) || [],
-        collection_id: payload.collection_id || undefined,
-        shipping_profile_id: undefined,
-        enable_variants: undefined,
-        additional_data: undefined,
-        categories: payload.categories.map((cat) => ({
-          id: cat,
-        })),
-        variants: payload.variants.map((variant) => ({
-          ...variant,
-          sku: variant.sku === "" ? undefined : variant.sku,
-          manage_inventory: true,
-          allow_backorder: false,
-          should_create: undefined,
-          is_default: undefined,
-          inventory_kit: undefined,
-          inventory: undefined,
-          prices: Object.keys(variant.prices || {}).map((key) => ({
-            currency_code: key,
-            amount: parseFloat(variant.prices?.[key] as string),
-          })),
-        })),
-      },
+      buildAdvancedProductPayload(
+        values,
+        uploadedMedia,
+        isDraftSubmission ? "draft" : "proposed"
+      ),
       {
         onSuccess: (data) => {
           toast.success(
@@ -289,6 +282,7 @@ export const ProductCreateForm = ({
           className="flex h-full flex-col overflow-hidden"
         >
           <RouteFocusModal.Header>
+            {modeSwitcher}
             <div className="-my-2 w-full border-l">
               <ProgressTabs.List className="justify-start-start flex w-full items-center">
                 <ProgressTabs.Trigger
@@ -360,6 +354,11 @@ export const ProductCreateForm = ({
         </ProgressTabs>
         <RouteFocusModal.Footer>
           <div className="flex items-center justify-end gap-x-2">
+            {!hasImage && (
+              <Alert variant="error" className="items-center py-1">
+                {IMAGE_REQUIRED_MESSAGE}
+              </Alert>
+            )}
             <RouteFocusModal.Close asChild>
               <Button variant="secondary" size="small">
                 {t("actions.cancel")}
@@ -370,14 +369,16 @@ export const ProductCreateForm = ({
               size="small"
               type="submit"
               isLoading={isPending}
+              disabled={!hasImage}
               className="whitespace-nowrap"
             >
-              Draft
+              Guardar borrador
             </Button>
             <PrimaryButton
               tab={tab}
               next={onNext}
               isLoading={isPending}
+              disabled={!hasImage}
               showInventoryTab={showInventoryTab}
             />
           </div>
@@ -391,6 +392,7 @@ type PrimaryButtonProps = {
   tab: Tab
   next: (tab: Tab) => void
   isLoading?: boolean
+  disabled?: boolean
   showInventoryTab: boolean
 }
 
@@ -398,6 +400,7 @@ const PrimaryButton = ({
   tab,
   next,
   isLoading,
+  disabled,
   showInventoryTab,
 }: PrimaryButtonProps) => {
   const { t } = useTranslation()
@@ -414,8 +417,9 @@ const PrimaryButton = ({
         variant="primary"
         size="small"
         isLoading={isLoading}
+        disabled={disabled}
       >
-        Create Product
+        Publicar producto
       </Button>
     )
   }

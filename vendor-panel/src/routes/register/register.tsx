@@ -95,17 +95,18 @@ export const Register = () => {
     return (
       <div className="bg-ui-bg-subtle flex min-h-dvh w-dvw items-center justify-center">
         <div className="mb-4 flex flex-col items-center">
-          <Heading>Thank You for registering!</Heading>
+          <Heading>¡Gracias por registrarte!</Heading>
           <Text
             size="small"
             className="text-ui-fg-subtle text-center mt-2 max-w-[320px]"
           >
-            You may need to wait for admin authorization before logging in. A
-            confirmation email will be sent to you shortly.
+            Es posible que debas esperar la autorización del equipo de Pickapp
+            antes de iniciar sesión. Pronto recibirás un correo de
+            confirmación.
           </Text>
 
           <Link to="/login">
-            <Button className="mt-8">Back to login page</Button>
+            <Button className="mt-8">Volver a iniciar sesión</Button>
           </Link>
         </div>
       </div>
@@ -138,7 +139,7 @@ export const Register = () => {
                           <Input
                             {...field}
                             className="bg-ui-bg-field-component mb-2"
-                            placeholder="Company name"
+                            placeholder="Nombre de tu negocio, ej. Cueros de Valle de Ángeles"
                           />
                         </Form.Control>
                       </Form.Item>
@@ -193,7 +194,7 @@ export const Register = () => {
                             type="password"
                             {...field}
                             className="bg-ui-bg-field-component"
-                            placeholder="Confirm Password"
+                            placeholder="Confirma tu contraseña"
                           />
                         </Form.Control>
                       </Form.Item>
@@ -218,7 +219,7 @@ export const Register = () => {
                 </Alert>
               )}
               <Button className="w-full" type="submit" isLoading={isPending}>
-                Sign up
+                Crear mi cuenta
               </Button>
             </form>
           </Form>

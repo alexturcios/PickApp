@@ -105,7 +105,7 @@ const useCoreRoutes = (): Omit<INavItem, "pathname">[] => {
   return [
     {
       icon: <Component />,
-      label: "Dashboard",
+      label: "Mi Panel",
       to: "/dashboard",
     },
     {
@@ -180,33 +180,33 @@ const useCoreRoutes = (): Omit<INavItem, "pathname">[] => {
     },
     {
       icon: <Star />,
-      label: "Reviews",
+      label: "Reseñas",
       to: "/reviews",
     },
     {
       icon: <ChatBubbleLeftRight />,
-      label: `Messages ${unreadMessages?.length && unreadMessages?.length > 0 ? `(${unreadMessages?.length})` : ""}`,
+      label: `Mensajes ${unreadMessages?.length && unreadMessages?.length > 0 ? `(${unreadMessages?.length})` : ""}`,
       to: "/messages",
     },
     {
       icon: <ListCheckbox />,
-      label: "Requests",
+      label: "Solicitudes",
       to: "/requests",
       items: [
         {
-          label: "Collections",
+          label: "Colecciones",
           to: "/requests/collections",
         },
         {
-          label: "Categories",
+          label: "Categorías",
           to: "/requests/categories",
         },
         {
-          label: "Reviews",
+          label: "Reseñas",
           to: "/requests/reviews",
         },
         {
-          label: "Orders returns",
+          label: "Devoluciones",
           to: "/requests/orders",
         },
       ],
@@ -218,7 +218,7 @@ const useExtensionRoutes = (): Omit<INavItem, "pathname">[] => {
   return [
     {
       icon: <StripeIcon />,
-      label: "Stripe Connect",
+      label: "Pagos con tarjeta",
       to: "/stripe-connect",
     },
   ]

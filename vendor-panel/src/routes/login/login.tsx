@@ -152,7 +152,7 @@ export const Login = () => {
                 </Alert>
               )}
               <Button className="w-full" type="submit" isLoading={isPending}>
-                Sign In
+                Iniciar sesión
               </Button>
             </form>
           </Form>
